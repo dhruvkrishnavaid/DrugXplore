@@ -1,0 +1,7 @@
+{
+  "name": "drugxplore",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
