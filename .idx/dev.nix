@@ -13,11 +13,11 @@
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
       # "vscodevim.vim"
-      "bradlc.vscode-tailwindcss",
-      "dbaeumer.vscode-eslint",
-      "esbenp.prettier-vscode",
-      "heybourn.headwind",
-      "oven.bun-vscode",
+      "bradlc.vscode-tailwindcss"
+      "dbaeumer.vscode-eslint"
+      "esbenp.prettier-vscode"
+      "heybourn.headwind"
+      "oven.bun-vscode"
       "rangav.vscode-thunder-client"
     ];
     workspace = {
@@ -25,11 +25,11 @@
       onCreate = {
         bun-install = "bun install";
         # Open editors for the following files by default, if they exist:
-        default.openFiles = [ "package.json" ];
+        default.openFiles = [ "package.json" "backend/.env.example" ];
       };
       # To run something each time the workspace is (re)started, use the `onStart` hook
       onStart = {
-        run-server = "bun --filter '*' dev";
+        bun-install = "bun install";
       };
     };
   };
@@ -37,9 +37,18 @@
   idx.previews = {
     enable = true;
     previews = {
-      frontend = {
+      web = {
+        command = [
+          "bun"
+          "--filter"
+          "*"
+          "dev"
+          "--host"
+          "0.0.0.0"
+          "--port"
+          "$PORT"
+        ];
         manager = "web";
-        port = 5173;
       };
     };
   };
