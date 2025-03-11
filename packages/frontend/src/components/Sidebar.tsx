@@ -1,6 +1,9 @@
+import useAuthStore from "../hooks/useAuthStore";
+
 const Sidebar = () => {
+  const authStore = useAuthStore();
   return (
-    <div className="w-80 max-h-screen bg-white flex flex-col">
+    <div className="w-80 h-screen fixed bg-white flex flex-col">
       <div className="font-black text-2xl text-center p-4 w-full">
         <h1>DrugXplore</h1>
       </div>
@@ -17,7 +20,9 @@ const Sidebar = () => {
           <li>Explore</li>
           <li>History</li>
         </ul>
-        <div className="mt-auto p-4">Create</div>
+        <button onClick={authStore.logout} className="mt-auto cursor-pointer p-4">
+          Log out
+        </button>
       </div>
     </div>
   );
