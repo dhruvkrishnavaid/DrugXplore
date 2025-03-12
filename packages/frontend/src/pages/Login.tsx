@@ -16,14 +16,17 @@ import useAuthStore from "../hooks/useAuthStore";
 const Login = () => {
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
-  if (process.env.NODE_ENV === "DEVELOPMENT") {
+  if (
+    window.location.hostname.split(".").toSpliced(0, 2).join(".") ===
+    "cloudworkstations.dev"
+  ) {
     connectAuthEmulator(
       auth,
       `https://9099-idx-drugxplore-1740297668908.${window.location.hostname
         .split(".")
         .toSpliced(0, 1)
         .join(".")}`,
-      { disableWarnings: true },
+      { disableWarnings: true }
     );
   }
   const authStore = useAuthStore();
@@ -48,17 +51,23 @@ const Login = () => {
         authStore.setToken(token);
       }
     }
-    if (!authStore.user) {
+    if (
+      !authStore.user &&
+      window.location.hostname.split(".").toSpliced(0, 2).join(".") ===
+        "cloudworkstations.dev"
+    ) {
       test();
     }
-  }, [auth, authStore]);
+  });
 
   const signInWithGoogle = async () => {
     try {
       let result;
-      if (process.env.NODE_ENV === "DEVELOPMENT") {
+      if (
+        window.location.hostname.split(".").toSpliced(0, 2).join(".") ===
+        "cloudworkstations.dev"
+      ) {
         signInWithRedirect(auth, provider);
-        result = await getRedirectResult(auth);
       } else {
         result = await signInWithPopup(auth, provider);
       }
