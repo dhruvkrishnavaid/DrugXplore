@@ -5,6 +5,7 @@ import {
   getAuth,
   getRedirectResult,
   GoogleAuthProvider,
+  signInWithPopup,
   signInWithRedirect,
 } from "firebase/auth";
 import { useEffect } from "react";
@@ -22,7 +23,7 @@ const Login = () => {
         .split(".")
         .toSpliced(0, 1)
         .join(".")}`,
-      { disableWarnings: true }
+      { disableWarnings: true },
     );
   }
   const authStore = useAuthStore();
@@ -50,12 +51,17 @@ const Login = () => {
     if (!authStore.user) {
       test();
     }
-  });
+  }, [auth, authStore]);
 
   const signInWithGoogle = async () => {
     try {
-      signInWithRedirect(auth, provider);
-      const result = await getRedirectResult(auth);
+      let result;
+      if (process.env.NODE_ENV === "DEVELOPMENT") {
+        signInWithRedirect(auth, provider);
+        result = await getRedirectResult(auth);
+      } else {
+        result = await signInWithPopup(auth, provider);
+      }
       if (result) {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;

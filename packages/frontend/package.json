@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "bunx vite",
+    "local-dev": "NODE_ENV=PRODUCTION bunx vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
