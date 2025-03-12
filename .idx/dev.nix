@@ -19,7 +19,7 @@
       "esbenp.prettier-vscode"
       "heybourn.headwind"
       "oven.bun-vscode"
-      "rangav.vscode-thunder-client"
+      "echoapi.echoapi-for-vscode"
     ];
     workspace = {
       # Runs when a workspace is first created with this `dev.nix` file
@@ -31,6 +31,7 @@
       # To run something each time the workspace is (re)started, use the `onStart` hook
       onStart = {
         bun-install = "bun install";
+        firebase-emulators-start = "cd packages/frontend && bunx firebase emulators:start";
       };
     };
   };
