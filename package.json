@@ -1,6 +1,10 @@
 {
   "name": "drugxplore",
   "private": true,
+  "trustedDependencies": [
+    "@swc/core",
+    "esbuild"
+  ],
   "workspaces": [
     "packages/*"
   ]
