@@ -7,6 +7,7 @@
   packages = [
     pkgs.bun
     pkgs.pypy
+    pkgs.firebase-tools
   ];
   # Sets environment variables in the workspace
   env = {};
@@ -31,7 +32,7 @@
       # To run something each time the workspace is (re)started, use the `onStart` hook
       onStart = {
         bun-install = "bun install";
-        firebase-emulators-start = "cd packages/frontend && bunx firebase emulators:start";
+        firebase-emulators-start = "cd packages/frontend && firebase emulators:start";
       };
     };
   };

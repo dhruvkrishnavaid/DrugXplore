@@ -1,7 +1,6 @@
 import { logEvent } from "firebase/analytics";
 import { FirebaseError } from "firebase/app";
 import {
-  connectAuthEmulator,
   getAuth,
   getRedirectResult,
   GoogleAuthProvider,
@@ -16,19 +15,6 @@ import useAuthStore from "../hooks/useAuthStore";
 const Login = () => {
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
-  if (
-    window.location.hostname.split(".").toSpliced(0, 2).join(".") ===
-    "cloudworkstations.dev"
-  ) {
-    connectAuthEmulator(
-      auth,
-      `https://9099-idx-drugxplore-1740297668908.${window.location.hostname
-        .split(".")
-        .toSpliced(0, 1)
-        .join(".")}`,
-      { disableWarnings: true }
-    );
-  }
   const authStore = useAuthStore();
   const navigate = useNavigate();
   useEffect(() => {
