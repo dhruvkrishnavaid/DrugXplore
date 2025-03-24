@@ -1,4 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Rochester&display=swap');
 @import "tailwindcss";
+
+@theme {
+  --color-background: #eef5ff;
+  --color-primary: #176b87;
+  --color-secondary: #86b6f6;
+  --color-tertiary: #b4d4ff;
+}
 
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -9,4 +17,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.signature {
+  font-family: "Rochester", cursive;
 }

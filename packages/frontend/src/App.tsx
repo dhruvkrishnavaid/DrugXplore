@@ -14,9 +14,9 @@ const App = ({ page }: { page: React.ReactNode }) => {
 
   if (authStore.token) {
     return (
-      <div className="flex divide-x">
+      <div className="flex bg-background">
         <Sidebar />
-        <div className="w-full ml-80 bg-neutral-50 min-h-screen flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center w-full min-h-screen ml-80">
           {page}
         </div>
       </div>
