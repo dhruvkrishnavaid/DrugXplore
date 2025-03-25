@@ -5,7 +5,7 @@ import useAuthStore from "../hooks/useAuthStore";
 
 const Sidebar = () => {
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
-  const [isGenerateOpen, setIsGenerateOpen] = useState(false);
+  const [isGenerateOpen, setIsGenerateOpen] = useState(true);
   const authStore = useAuthStore();
   const location = useLocation();
   const isActive = (path: string) => {
@@ -15,7 +15,7 @@ const Sidebar = () => {
     <div className="fixed flex flex-col h-screen p-2 w-80">
       <div className="flex flex-col h-full bg-white shadow-lg rounded-3xl">
         <div className="w-full p-6 font-black text-center">
-          <h1 className="text-3xl signature">DrugXplore</h1>
+          <h1 className="signature">DrugXplore</h1>
         </div>
 
         <div className="flex flex-col items-center h-full gap-4">
@@ -68,7 +68,7 @@ const Sidebar = () => {
             <div className="flex flex-col w-full">
               <button
                 onClick={() => setIsGenerateOpen(!isGenerateOpen)}
-                className="hover:bg-neutral-100 cursor-pointer flex gap-1 p-4 relative text-neutral-500"
+                className="relative flex p-4 cursor-pointer hover:bg-neutral-100 gap-1 text-neutral-500"
               >
                 <svg
                   width="24"
@@ -107,10 +107,10 @@ const Sidebar = () => {
               <AnimatePresence>
                 {isGenerateOpen && (
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="flex flex-col relative text-neutral-500"
+                    initial={{ opacity: 0, height: 0, y: -35 }}
+                    animate={{ opacity: 1, height: "auto", dur: 300, y: 0 }}
+                    exit={{ opacity: 0, height: 0, y: -35 }}
+                    className="relative flex flex-col text-neutral-500"
                   >
                     <Link
                       to="/app/generate/discovery"
@@ -274,7 +274,7 @@ const Sidebar = () => {
                 <div className="flex flex-col items-start justify-center">
                   <Link
                     to="/app/profile"
-                    className="flex items-center p-4 min-w-56 hover:bg-neutral-100 justify-between w-full gap-2 hover:text-primary transition-colors duration-300 rounded-t-lg"
+                    className="flex items-center justify-between w-full p-4 rounded-t-lg min-w-56 hover:bg-neutral-100 gap-2 hover:text-primary transition-colors duration-300"
                   >
                     View Profile
                     <svg
@@ -288,10 +288,10 @@ const Sidebar = () => {
                       <path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
                     </svg>
                   </Link>
-                  <hr className="text-transparent bg-neutral-200 h-1/2 w-full" />
+                  <hr className="w-full text-transparent bg-neutral-200 h-1/2" />
                   <button
                     onClick={authStore.logout}
-                    className="flex items-center rounded-b-lg p-4 hover:bg-red-100 min-w-56 justify-between transition-colors duration-300 w-full text-red-500 cursor-pointer gap-2"
+                    className="flex items-center justify-between w-full p-4 text-red-500 rounded-b-lg cursor-pointer hover:bg-red-100 min-w-56 transition-colors duration-300 gap-2"
                   >
                     <span>Logout</span>
                     <svg

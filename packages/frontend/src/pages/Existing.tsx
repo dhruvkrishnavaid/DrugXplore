@@ -8,8 +8,8 @@ const Existing = () => {
   const uid = getAuth(app).currentUser?.uid;
   const [symptomsCount, setSymptomsCount] = useState(1);
   const [medicinesCount, setMedicinesCount] = useState(1);
-  const [symptoms, setSymptoms] = useState<string[]>([]);
-  const [medicines, setMedicines] = useState<string[]>([]);
+  const [symptoms, setSymptoms] = useState<string[]>([""]);
+  const [medicines, setMedicines] = useState<string[]>([""]);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{ text: string } | null>(null);
   // todo: sanitize user input
@@ -47,8 +47,10 @@ const Existing = () => {
   };
 
   return (
-    <div className="h-full flex flex-col gap-6 items-center p-6 w-full">
-      <h1 className="text-4xl font-bold">From Existing Medicines</h1>
+    <div className="flex flex-col items-center w-full h-full p-6 gap-6">
+      <h1 className="text-4xl font-bold text-center">
+        From Existing Medicines
+      </h1>
       <p className="text-center">
         Existing medicines are drugs that have been approved by regulatory
         authorities for the treatment of specific diseases or conditions.
@@ -57,34 +59,80 @@ const Existing = () => {
       </p>
       <div className="w-full">
         <form className="flex flex-col w-full gap-4">
+          <div className="flex items-center justify-between gap-4">
+            <span className="text-xl font-bold">Symptoms</span>
+            <button
+              type="button"
+              onClick={() => setSymptomsCount(symptomsCount + 1)}
+              className="items-center hidden px-4 py-2 font-bold text-white rounded cursor-pointer lg:flex gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 5l0 14" />
+                <path d="M5 12l14 0" />
+              </svg>
+              Add Symptom
+            </button>
+          </div>
           {[...Array(symptomsCount)].map((_, i) => (
             <div key={i} className="flex justify-between gap-4">
-              <label
-                htmlFor={`symptom ${i + 1}`}
-                className="items-center flex justify-center"
-              >
-                Symptom {i + 1}
-              </label>
-              <input
-                type="text"
-                name={`symptom ${i + 1}`}
-                id={`symptom ${i + 1}`}
-                placeholder={`Symptom ${i + 1}`}
-                value={symptoms[i]}
-                onChange={(e) => {
-                  const newSymptoms = [...symptoms];
-                  newSymptoms[i] = e.target.value;
-                  setSymptoms(newSymptoms);
-                }}
-                className="max-w-lg w-1/2 p-2 border bg-white rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2 focus:ring-primary"
-              />
-            </div>
+                <input
+                  type="text"
+                  placeholder={`Symptom ${i + 1}`}
+                  value={symptoms[i]}
+                  onChange={(e) => {
+                    const newSymptoms = [...symptoms];
+                    newSymptoms[i] = e.target.value;
+                    setSymptoms(newSymptoms);
+                  }}
+                  className="w-full max-w-lg p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
+                />
+                {symptomsCount > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newSymptoms = [...symptoms];
+                      newSymptoms.splice(i, 1);
+                      setSymptoms(newSymptoms);
+                      setSymptomsCount(symptomsCount - 1);
+                    }}
+                    className="flex items-center justify-center p-2 text-red-500 rounded-full cursor-pointer bg-red-500/10 hover:bg-red-500/20 transition-colors duration-300"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M4 7l16 0" />
+                      <path d="M10 11l0 6" />
+                      <path d="M14 11l0 6" />
+                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                    </svg>
+                  </button>
+                )}
+              </div>
           ))}
           <div className="flex justify-evenly gap-4">
             <button
               type="button"
               onClick={() => setSymptomsCount(symptomsCount + 1)}
-              className="px-4 flex gap-2 py-2 font-bold text-white rounded cursor-pointer bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
+              className="flex lg:hidden px-4 py-2 font-bold text-white rounded cursor-pointer gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
             >
               <svg
                 width="24"
@@ -103,34 +151,80 @@ const Existing = () => {
               Add Symptom
             </button>
           </div>
+          <div className="flex items-center justify-between gap-4">
+            <span className="text-xl font-bold">Medicines</span>
+            <button
+              type="button"
+              onClick={() => setMedicinesCount(medicinesCount + 1)}
+              className="items-center hidden px-4 py-2 font-bold text-white rounded cursor-pointer lg:flex gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 5l0 14" />
+                <path d="M5 12l14 0" />
+              </svg>
+              Add Medicine
+            </button>
+          </div>
           {[...Array(medicinesCount)].map((_, i) => (
             <div key={i} className="flex justify-between gap-4">
-              <label
-                htmlFor={`medicine ${i + 1}`}
-                className="items-center flex justify-center"
-              >
-                Medicine {i + 1}
-              </label>
-              <input
-                type="text"
-                name={`medicine ${i + 1}`}
-                id={`medicine ${i + 1}`}
-                placeholder={`Medicine ${i + 1}`}
-                value={medicines[i]}
-                onChange={(e) => {
-                  const newMedicines = [...medicines];
-                  newMedicines[i] = e.target.value;
-                  setMedicines(newMedicines);
-                }}
-                className="max-w-lg w-1/2 p-2 border bg-white rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2 focus:ring-primary"
-              />
-            </div>
+                <input
+                  type="text"
+                  placeholder={`Medicine ${i + 1}`}
+                  value={medicines[i]}
+                  onChange={(e) => {
+                    const newMedicines = [...medicines];
+                    newMedicines[i] = e.target.value;
+                    setMedicines(newMedicines);
+                  }}
+                  className="w-full max-w-lg p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
+                />
+                {medicinesCount > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newMedicines = [...medicines];
+                      newMedicines.splice(i, 1);
+                      setSymptoms(newMedicines);
+                      setMedicinesCount(medicinesCount - 1);
+                    }}
+                    className="flex items-center justify-center p-2 text-red-500 rounded-full cursor-pointer bg-red-500/10 hover:bg-red-500/20 transition-colors duration-300"
+                  >
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M4 7l16 0" />
+                      <path d="M10 11l0 6" />
+                      <path d="M14 11l0 6" />
+                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                    </svg>
+                  </button>
+                )}
+              </div>
           ))}
           <div className="flex justify-evenly gap-4">
             <button
               type="button"
               onClick={() => setMedicinesCount(medicinesCount + 1)}
-              className="px-4 flex gap-2 py-2 font-bold text-white rounded cursor-pointer bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
+              className="flex px-4 py-2 font-bold text-white rounded cursor-pointer gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
             >
               <svg
                 width="24"
@@ -146,15 +240,18 @@ const Existing = () => {
                 <path d="M12 5l0 14" />
                 <path d="M5 12l14 0" />
               </svg>
-              Add Symptom
+              Add Medicine
             </button>
           </div>
           <div className="flex justify-evenly gap-4">
             <button
               type="button"
-              disabled={!symptoms.length && !medicines.length}
+              disabled={
+                loading ||
+                (!symptoms.toString().length && !medicines.toString().length)
+              }
               onClick={getResults}
-              className="px-4 flex gap-2 py-2 font-bold text-white rounded cursor-pointer bg-secondary hover:bg-primary transition-colors duration-300 disabled:cursor-not-allowed disabled:bg-secondary/80"
+              className="flex px-4 py-2 font-bold text-white rounded cursor-pointer gap-2 bg-secondary hover:bg-primary transition-colors duration-300 disabled:cursor-not-allowed disabled:bg-secondary/80"
             >
               <svg
                 width="24"
@@ -178,7 +275,7 @@ const Existing = () => {
         </form>
       </div>
       {loading && (
-        <div className="flex flex-col items-center justify-center w-full h-min text-center gap-2">
+        <div className="flex flex-col items-center justify-center w-full text-center h-min gap-2">
           <span className="flex gap-5">
             <svg
               aria-hidden="true"
@@ -200,14 +297,14 @@ const Existing = () => {
         </div>
       )}
       {result && (
-        <div className="w-full flex flex-col justify-center items-center gap-4">
+        <div className="flex flex-col items-center justify-center w-full gap-4">
           <h2 className="text-2xl font-bold">Results</h2>
           <Markdown>{result.text}</Markdown>
           {!loading && (
             <button
               type="button"
               onClick={saveResults}
-              className="px-4 flex gap-2 py-2 font-bold text-white rounded cursor-pointer bg-secondary w-fit hover:bg-primary transition-colors duration-300"
+              className="flex px-4 py-2 font-bold text-white rounded cursor-pointer gap-2 bg-secondary w-fit hover:bg-primary transition-colors duration-300"
             >
               <svg
                 width="24"

@@ -104,10 +104,10 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-white">
       <div className="flex flex-col w-full px-16 pt-24 gap-4">
         <div className="w-full">
-          <h1 className="text-3xl signature">DrugXplore</h1>
+          <h1 className="signature">DrugXplore</h1>
         </div>
         <div className="my-auto">
           <div>
@@ -126,7 +126,7 @@ const Signup = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2"
+              className="max-w-lg p-2 border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2"
             />
             <input
               type="password"
@@ -134,7 +134,7 @@ const Signup = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2"
+              className="max-w-lg p-2 border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2"
             />
             <ul className="text-sm list-disc list-inside space-y-1">
               <li
@@ -193,7 +193,7 @@ const Signup = () => {
             <p className="text-gray-600">Already have an account?</p>
             <Link
               to="/login"
-              className="ml-2 text-primary/80 hover:text-primary font-semibold transition-colors duration-300"
+              className="ml-2 font-semibold text-primary/80 hover:text-primary transition-colors duration-300"
             >
               Login
             </Link>

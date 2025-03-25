@@ -7,7 +7,7 @@ import app, { db } from "../hooks/firebase";
 const Ayurveda = () => {
   const uid = getAuth(app).currentUser?.uid;
   const [count, setCount] = useState(1);
-  const [symptoms, setSymptoms] = useState<string[]>([]);
+  const [symptoms, setSymptoms] = useState<string[]>([""]);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{ text: string } | null>(null);
   // todo: sanitize user input
@@ -45,8 +45,8 @@ const Ayurveda = () => {
   };
 
   return (
-    <div className="h-full flex flex-col gap-6 items-center p-6 w-full">
-      <h1 className="text-4xl font-bold">From Ayurvedic Sources</h1>
+    <div className="flex flex-col items-center w-full h-full p-6 gap-6">
+      <h1 className="text-4xl font-bold text-center">From Ayurvedic Sources</h1>
       <p className="text-center">
         Ayurveda is a system of medicine with historical roots in the Indian
         subcontinent. Globalized and modernized practices derived from Ayurveda
@@ -56,18 +56,36 @@ const Ayurveda = () => {
       </p>
       <div className="w-full">
         <form className="flex flex-col w-full gap-4">
+          <div className="flex items-center justify-between gap-4">
+            <span className="text-xl font-bold">
+              Symptoms<span className="text-red-500">*</span>
+            </span>
+            <button
+              type="button"
+              onClick={() => setCount(count + 1)}
+              className="items-center hidden px-4 py-2 font-bold text-white rounded cursor-pointer lg:flex gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 5l0 14" />
+                <path d="M5 12l14 0" />
+              </svg>
+              Add Symptoms
+            </button>
+          </div>
           {[...Array(count)].map((_, i) => (
             <div key={i} className="flex justify-between gap-4">
-              <label
-                htmlFor={`symptom ${i + 1}`}
-                className="items-center flex justify-center"
-              >
-                Symptom {i + 1}
-              </label>
               <input
                 type="text"
-                name={`symptom ${i + 1}`}
-                id={`symptom ${i + 1}`}
                 placeholder={`Symptom ${i + 1}`}
                 value={symptoms[i]}
                 onChange={(e) => {
@@ -75,15 +93,45 @@ const Ayurveda = () => {
                   newSymptoms[i] = e.target.value;
                   setSymptoms(newSymptoms);
                 }}
-                className="max-w-lg w-1/2 p-2 border bg-white rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2 focus:ring-primary"
+                className="w-full max-w-lg p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
               />
+              {count > 1 && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    const newSymptoms = [...symptoms];
+                    newSymptoms.splice(i, 1);
+                    setSymptoms(newSymptoms);
+                    setCount(count - 1);
+                  }}
+                  className="flex items-center justify-center p-2 text-red-500 rounded-full cursor-pointer bg-red-500/10 hover:bg-red-500/20 transition-colors duration-300"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M4 7l16 0" />
+                    <path d="M10 11l0 6" />
+                    <path d="M14 11l0 6" />
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                  </svg>
+                </button>
+              )}
             </div>
           ))}
-          <div className="flex justify-evenly gap-4">
+          <div className="flex justify-evenly">
             <button
               type="button"
               onClick={() => setCount(count + 1)}
-              className="px-4 flex gap-2 py-2 font-bold text-white rounded cursor-pointer bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
+              className="flex lg:hidden px-4 py-2 font-bold text-white rounded cursor-pointer gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
             >
               <svg
                 width="24"
@@ -101,11 +149,13 @@ const Ayurveda = () => {
               </svg>
               Add Symptom
             </button>
+          </div>
+          <div className="flex justify-evenly">
             <button
               type="button"
-              disabled={!symptoms.length || symptoms[0] === ""}
+              disabled={loading || !symptoms.toString().length}
               onClick={getResults}
-              className="px-4 flex gap-2 py-2 font-bold text-white rounded cursor-pointer bg-secondary hover:bg-primary transition-colors duration-300 disabled:cursor-not-allowed disabled:bg-secondary/80"
+              className="flex px-4 py-2 font-bold text-white rounded cursor-pointer gap-2 bg-secondary hover:bg-primary transition-colors duration-300 disabled:cursor-not-allowed disabled:bg-secondary/80"
             >
               <svg
                 width="24"
@@ -129,7 +179,7 @@ const Ayurveda = () => {
         </form>
       </div>
       {loading && (
-        <div className="flex flex-col items-center justify-center w-full h-min text-center gap-2">
+        <div className="flex flex-col items-center justify-center w-full text-center h-min gap-2">
           <span className="flex gap-5">
             <svg
               aria-hidden="true"
@@ -151,14 +201,14 @@ const Ayurveda = () => {
         </div>
       )}
       {result && (
-        <div className="w-full flex flex-col justify-center items-center gap-4">
+        <div className="flex flex-col items-center justify-center w-full gap-4">
           <h2 className="text-2xl font-bold">Results</h2>
           <Markdown>{result.text}</Markdown>
           {!loading && (
             <button
               type="button"
               onClick={saveResults}
-              className="px-4 flex gap-2 py-2 font-bold text-white rounded cursor-pointer bg-secondary w-fit hover:bg-primary transition-colors duration-300"
+              className="flex px-4 py-2 font-bold text-white rounded cursor-pointer gap-2 bg-secondary w-fit hover:bg-primary transition-colors duration-300"
             >
               <svg
                 width="24"
