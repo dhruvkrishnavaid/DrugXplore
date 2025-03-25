@@ -186,15 +186,15 @@ const Sidebar = () => {
               </AnimatePresence>
             </div>
             <Link
-              to="/app/history"
+              to="/app/saved"
               className={`hover:bg-neutral-100 flex gap-1 p-4 relative text-neutral-500 transition-all duration-300 ${
-                isActive("/app/history") &&
+                isActive("/app/saved") &&
                 "text-primary font-extrabold bg-neutral-100"
               }`}
             >
               <div
                 className={`absolute top-0 right-0 h-full w-0 transition-all duration-300 rounded-r-xl bg-primary rounded-full ${
-                  isActive("/app/history") && "w-1.5"
+                  isActive("/app/saved") && "w-1.5"
                 }`}
               ></div>
               <svg
@@ -208,10 +208,13 @@ const Sidebar = () => {
                 strokeLinejoin="round"
               >
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M12 8l0 4l2 2" />
-                <path d="M3.05 11a9 9 0 1 1 .5 4m-.5 5v-5h5" />
+                <path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5" />
+                <path d="M12 12l8 -4.5" />
+                <path d="M12 12l0 9" />
+                <path d="M12 12l-8 -4.5" />
+                <path d="M16 5.25l-8 4.5" />
               </svg>
-              History
+              Saved
             </Link>
           </div>
           <div className="flex w-full p-4 mt-auto gap-2">

@@ -4,6 +4,7 @@ import "dotenv/config";
 import express from "express";
 import ayurvedaRouter from "./src/routes/ayurveda";
 import discoveryRouter from "./src/routes/discovery";
+import errorRouter from "./src/routes/error";
 import existingRouter from "./src/routes/existing";
 import greetRouter from "./src/routes/greet";
 
@@ -18,6 +19,7 @@ app.use(ayurvedaRouter);
 app.use(discoveryRouter);
 app.use(existingRouter);
 app.use(greetRouter);
+app.use(errorRouter);
 
 app.listen(port, () => {
   console.log(`Server started at http://localhost:${port}`);

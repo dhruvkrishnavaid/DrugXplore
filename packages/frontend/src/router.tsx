@@ -33,8 +33,8 @@ const router = createBrowserRouter([
         children: [{ path: "", element: <App page={"EXPLORE"} /> }],
       },
       {
-        path: "history",
-        children: [{ path: "", element: <App page={"HISTORY"} /> }],
+        path: "saved",
+        children: [{ path: "", element: <App page={"SAVED"} /> }],
       },
       {
         path: "about",

@@ -93,7 +93,7 @@ const Login = () => {
         } else {
           console.error("Error signing in with Email and Password:", error);
         }
-          alert("Error signing in with Email and password! Please try again.");
+        alert("Error signing in with Email and password! Please try again.");
       }
     }
   };
@@ -121,7 +121,7 @@ const Login = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2 focus:ring-primary"
+              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2"
             />
             <input
               type="password"
@@ -129,13 +129,13 @@ const Login = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2 focus:ring-primary"
+              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2"
             />
             <button
               type="button"
               onClick={signIn}
               disabled={!email || !(password.length > 7)}
-              className="px-4 py-2 font-bold text-white rounded cursor-pointer bg-primary/80 hover:bg-primary w-min transition-colors duration-300 disabled:cursor-not-allowed disabled:bg-primary/40"
+              className="px-4 py-2 font-bold text-white rounded cursor-pointer bg-secondary hover:bg-primary w-min transition-colors duration-300 disabled:cursor-not-allowed disabled:bg-secondary/40"
             >
               Login
             </button>
@@ -145,11 +145,7 @@ const Login = () => {
                 onClick={signInWithGoogle}
                 className="p-4 border rounded-full cursor-pointer w-min hover:bg-primary hover:text-white transition-colors duration-300"
               >
-                <svg
-                  width="24"
-                  height="24"
-                  fill="currentColor"
-                >
+                <svg width="24" height="24" fill="currentColor">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M12 2a9.96 9.96 0 0 1 6.29 2.226a1 1 0 0 1 .04 1.52l-1.51 1.362a1 1 0 0 1 -1.265 .06a6 6 0 1 0 2.103 6.836l.001 -.004h-3.66a1 1 0 0 1 -.992 -.883l-.007 -.117v-2a1 1 0 0 1 1 -1h6.945a1 1 0 0 1 .994 .89c.04 .367 .061 .737 .061 1.11c0 5.523 -4.477 10 -10 10s-10 -4.477 -10 -10s4.477 -10 10 -10z" />
                 </svg>

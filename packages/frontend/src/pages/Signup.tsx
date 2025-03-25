@@ -83,7 +83,11 @@ const Signup = () => {
     if (email && password.length > 7) {
       console.log(email, password);
       try {
-        const result = await createUserWithEmailAndPassword(auth, email, password);
+        const result = await createUserWithEmailAndPassword(
+          auth,
+          email,
+          password,
+        );
         if (result) {
           const user = result.user;
           authStore.setUser(user);
@@ -122,7 +126,7 @@ const Signup = () => {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2 focus:ring-primary"
+              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2"
             />
             <input
               type="password"
@@ -130,7 +134,7 @@ const Signup = () => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2 focus:ring-primary"
+              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2"
             />
             <ul className="text-sm list-disc list-inside space-y-1">
               <li
@@ -163,7 +167,7 @@ const Signup = () => {
               type="button"
               onClick={signUp}
               disabled={!email || !(password.length > 7)}
-              className="px-4 py-2 font-bold text-white rounded cursor-pointer bg-primary/80 hover:bg-primary w-min transition-colors duration-300 disabled:cursor-not-allowed disabled:bg-primary/40"
+              className="px-4 py-2 font-bold text-white rounded cursor-pointer bg-secondary hover:bg-primary w-min transition-colors duration-300 disabled:cursor-not-allowed disabled:bg-secondary/40"
             >
               Signup
             </button>
