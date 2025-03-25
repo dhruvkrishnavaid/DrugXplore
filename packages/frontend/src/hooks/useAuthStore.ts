@@ -1,4 +1,4 @@
-import { User } from "firebase/auth";
+import { getAuth, signOut, User } from "firebase/auth";
 import { create } from "zustand";
 import { combine, persist } from "zustand/middleware";
 
@@ -12,7 +12,14 @@ const useAuthStore = create(
       (set) => ({
         setUser: (user: User) => set({ user }),
         setToken: (token: string | undefined) => set({ token }),
-        logout: () => set({ user: undefined, token: undefined }),
+        logout: async () => {
+          try {
+            await signOut(getAuth());
+            set({ user: undefined, token: undefined });
+          } catch (error) {
+            console.error("Failed to sign out: ", error);
+          }
+        },
       }),
     ),
     { name: "user" },

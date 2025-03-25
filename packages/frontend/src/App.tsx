@@ -1,18 +1,18 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import Sidebar from "./components/Sidebar";
 import useAuthStore from "./hooks/useAuthStore";
-import { useEffect } from "react";
 
 const App = ({ page }: { page: React.ReactNode }) => {
   const authStore = useAuthStore();
   const navigate = useNavigate();
   useEffect(() => {
-    if (!authStore.token) {
+    if (!authStore.user) {
       navigate("/login");
     }
-  }, [authStore.token, navigate]);
+  }, [authStore.user, navigate]);
 
-  if (authStore.token) {
+  if (authStore.user) {
     return (
       <div className="flex bg-background">
         <Sidebar />

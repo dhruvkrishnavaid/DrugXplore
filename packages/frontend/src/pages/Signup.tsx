@@ -1,18 +1,21 @@
 import { logEvent } from "firebase/analytics";
 import { FirebaseError } from "firebase/app";
 import {
+  createUserWithEmailAndPassword,
   getAuth,
   getRedirectResult,
   GoogleAuthProvider,
   signInWithPopup,
   signInWithRedirect,
 } from "firebase/auth";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { analytics } from "../hooks/firebase";
 import useAuthStore from "../hooks/useAuthStore";
 
 const Signup = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
 
@@ -21,7 +24,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (authStore.user) {
-      navigate("/");
+      navigate("/app");
       logEvent(analytics, "signup", {
         method: "google",
       });
@@ -76,6 +79,26 @@ const Signup = () => {
     }
   };
 
+  const signUp = async () => {
+    if (email && password.length > 7) {
+      console.log(email, password);
+      try {
+        const result = await createUserWithEmailAndPassword(auth, email, password);
+        if (result) {
+          const user = result.user;
+          authStore.setUser(user);
+        }
+      } catch (error) {
+        if (error instanceof FirebaseError) {
+          console.error("Firebase Error:", error.code, error.message);
+        } else {
+          console.error("Error signing in with Email and Password:", error);
+          alert("Error signing in with Email and password! Please try again.");
+        }
+      }
+    }
+  };
+
   return (
     <div className="flex min-h-screen">
       <div className="flex flex-col w-full px-16 pt-24 gap-4">
@@ -92,24 +115,55 @@ const Signup = () => {
               Hey there, welcome to DrugXplore
             </p>
           </div>
-          <form action="" className="flex flex-col py-16 space-y-4">
+          <form className="flex flex-col py-16 space-y-4">
             <input
-              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900"
               type="email"
-              name=""
-              id=""
+              name="email"
               placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2 focus:ring-primary"
             />
             <input
-              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900"
               type="password"
-              name=""
-              id=""
+              name="password"
               placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="max-w-lg p-2 border rounded-lg border-neutral-300 text-neutral-900 outline-none ring-primary focus:ring-2 focus:ring-primary"
             />
+            <ul className="text-sm list-disc list-inside space-y-1">
+              <li
+                className={
+                  email.length > 0
+                    ? email.match(
+                        /^[\w.]+@(gmail\.com|yahoo\.com|outlook\.com|icloud\.com)$/,
+                      )
+                      ? "text-green-500"
+                      : "text-red-500"
+                    : "text-gray-600"
+                }
+              >
+                Enter a valid email address (gmail.com, yahoo.com, outlook.com,
+                icloud.com)
+              </li>
+              <li
+                className={
+                  password.length > 0
+                    ? password.length > 7
+                      ? "text-green-500"
+                      : "text-red-500"
+                    : "text-gray-600"
+                }
+              >
+                Enter a password of atleast 8 characters
+              </li>
+            </ul>
             <button
-              type="submit"
-              className="px-4 py-2 font-bold text-white rounded cursor-pointer bg-primary/80 hover:bg-primary w-min transition-colors duration-300"
+              type="button"
+              onClick={signUp}
+              disabled={!email || !(password.length > 7)}
+              className="px-4 py-2 font-bold text-white rounded cursor-pointer bg-primary/80 hover:bg-primary w-min transition-colors duration-300 disabled:cursor-not-allowed disabled:bg-primary/40"
             >
               Signup
             </button>
@@ -135,7 +189,7 @@ const Signup = () => {
             <p className="text-gray-600">Already have an account?</p>
             <Link
               to="/login"
-              className="ml-2 text-primary/80 hover:text-primary transition-colors duration-300"
+              className="ml-2 text-primary/80 hover:text-primary font-semibold transition-colors duration-300"
             >
               Login
             </Link>
