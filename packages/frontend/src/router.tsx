@@ -8,11 +8,13 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import Saved from "./pages/Saved";
+import Error from "./pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "",
     element: <Landing />,
+    errorElement: <Error />,
   },
   {
     path: "login",
