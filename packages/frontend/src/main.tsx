@@ -8,7 +8,7 @@ import router from "./router";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <QueryClientProvider client={new QueryClient()}>
-    <RouterProvider router={router} />
+      <RouterProvider router={router} />
     </QueryClientProvider>
   </StrictMode>,
 );

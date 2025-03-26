@@ -1,10 +1,10 @@
 import { getAuth } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore/lite";
 import Markdown from "markdown-to-jsx";
-import { useState } from "react";
-import app, { db } from "../hooks/firebase";
 import { AnimatePresence } from "motion/react";
+import { useState } from "react";
 import Popup from "../components/Popup";
+import app, { db } from "../hooks/firebase";
 
 const Discovery = () => {
   const [medicine_name, setMedicineName] = useState("");

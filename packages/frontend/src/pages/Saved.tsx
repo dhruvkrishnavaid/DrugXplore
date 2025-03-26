@@ -1,17 +1,22 @@
+import { useQueries } from "@tanstack/react-query";
 import { getAuth } from "firebase/auth";
-import app, { db } from "../hooks/firebase";
 import {
   collection,
   DocumentData,
   getDocs,
   query,
 } from "firebase/firestore/lite";
-import { useQueries } from "@tanstack/react-query";
+import app, { db } from "../hooks/firebase";
 
 const Saved = () => {
   const auth = getAuth(app);
   const getAyurveda = async () => {
-    const collectionRef = collection(db, "ayurveda", auth.currentUser!.uid, "results");
+    const collectionRef = collection(
+      db,
+      "ayurveda",
+      auth.currentUser!.uid,
+      "results",
+    );
     const q = query(collectionRef);
     const querySnapshot = await getDocs(q);
     const data: DocumentData = [];
@@ -54,13 +59,15 @@ const Saved = () => {
   // TODO: Create different return types for every query
   return (
     <div>
-      {results[2].data?.map((i: {name: string, description: string}, index: number) => (
-        <>
-          <div key={index}>{i.name}</div>
-          <div>{i.description}</div>
-          <hr className="my-4" />
-        </>
-      ))}
+      {results[2].data?.map(
+        (i: { name: string; description: string }, index: number) => (
+          <>
+            <div key={index}>{i.name}</div>
+            <div>{i.description}</div>
+            <hr className="my-4" />
+          </>
+        ),
+      )}
     </div>
   );
 };

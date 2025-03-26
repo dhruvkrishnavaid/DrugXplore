@@ -72,7 +72,10 @@ const Signup = () => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
         const user = result.user;
-        await setDoc(doc(db, "users", user.uid), JSON.parse(JSON.stringify(user)));
+        await setDoc(
+          doc(db, "users", user.uid),
+          JSON.parse(JSON.stringify(user)),
+        );
         authStore.setUser(user);
         authStore.setToken(token);
       }
@@ -96,10 +99,10 @@ const Signup = () => {
         );
         if (result) {
           const user = result.user;
-        await setDoc(
-          doc(db, "users", user.uid),
-          JSON.parse(JSON.stringify(user)),
-        );
+          await setDoc(
+            doc(db, "users", user.uid),
+            JSON.parse(JSON.stringify(user)),
+          );
           authStore.setUser(user);
         }
       } catch (error) {

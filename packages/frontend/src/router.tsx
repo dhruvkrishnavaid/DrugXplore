@@ -2,13 +2,13 @@ import { createBrowserRouter } from "react-router";
 import App from "./App";
 import Ayurveda from "./pages/Ayurveda";
 import Discovery from "./pages/Discovery";
+import Error from "./pages/Error";
 import Existing from "./pages/Existing";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import Signup from "./pages/Signup";
 import Saved from "./pages/Saved";
-import Error from "./pages/Error";
+import Signup from "./pages/Signup";
 
 const router = createBrowserRouter([
   {
