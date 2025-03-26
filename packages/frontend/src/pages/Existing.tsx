@@ -144,7 +144,7 @@ const Existing = () => {
             <button
               type="button"
               onClick={() => setSymptomsCount(symptomsCount + 1)}
-              className="flex lg:hidden px-4 py-2 font-bold text-white rounded cursor-pointer gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
+              className="flex px-4 py-2 font-bold text-white rounded cursor-pointer lg:hidden gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
             >
               <svg
                 width="24"

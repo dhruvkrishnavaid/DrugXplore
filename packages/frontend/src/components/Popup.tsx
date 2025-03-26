@@ -30,19 +30,19 @@ const Popup = ({
         animate={{ opacity: 1, dur: 300, backdropFilter: "blur(8px)" }}
         exit={{ opacity: 0, backdropFilter: "blur(0)" }}
         onClick={onClose}
-        className="fixed top-0 left-0 h-screen w-screen flex items-center justify-center bg-neutral-500/50"
+        className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-neutral-500/50"
       ></motion.button>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 100, dur: 300 }}
         exit={{ opacity: 0 }}
-        className="fixed top-0 left-0 h-screen w-screen flex items-center justify-center"
+        className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen"
       >
-        <div className="bg-white p-6 rounded-xl shadow-xl flex flex-col gap-4 w-full max-w-96 relative">
+        <div className="relative flex flex-col w-full p-6 bg-white shadow-xl rounded-xl gap-4 max-w-96">
           <button
             type="button"
             onClick={onClose}
-            className="absolute right-4 top-4 flex items-center justify-center p-2 text-red-500 rounded-full cursor-pointer bg-red-500/10 hover:bg-red-500/20 transition-colors duration-300"
+            className="absolute flex items-center justify-center p-2 text-red-500 rounded-full cursor-pointer right-4 top-4 bg-red-500/10 hover:bg-red-500/20 transition-colors duration-300"
           >
             <svg
               width="24"
@@ -62,12 +62,12 @@ const Popup = ({
           <span className="text-xl font-bold">{title}</span>
           <div>{children}</div>
           {hasButtons && (
-            <div className="flex justify-end gap-4 items-center">
+            <div className="flex items-center justify-end gap-4">
               {secondaryAction && (
                 <button
                   type="button"
                   onClick={secondaryAction.onClick}
-                  className="bg-tertiary/90 text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-tertiary transition-colors duration-300"
+                  className="px-4 py-2 text-white rounded-lg cursor-pointer bg-tertiary/90 hover:bg-tertiary transition-colors duration-300"
                 >
                   {secondaryAction?.label}
                 </button>
@@ -76,7 +76,7 @@ const Popup = ({
                 <button
                   type="button"
                   onClick={primaryAction.onClick}
-                  className="bg-secondary text-white px-4 py-2 rounded-lg cursor-pointer hover:bg-primary transition-colors duration-300"
+                  className="px-4 py-2 text-white rounded-lg cursor-pointer bg-secondary hover:bg-primary transition-colors duration-300"
                 >
                   {primaryAction.label}
                 </button>
