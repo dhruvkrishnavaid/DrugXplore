@@ -8,16 +8,17 @@ import {
   signInWithPopup,
   signInWithRedirect,
 } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore/lite";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { analytics } from "../hooks/firebase";
+import app, { analytics, db } from "../hooks/firebase";
 import useAuthStore from "../hooks/useAuthStore";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const provider = new GoogleAuthProvider();
-  const auth = getAuth();
+  const auth = getAuth(app);
 
   const navigate = useNavigate();
   const authStore = useAuthStore();
@@ -38,6 +39,7 @@ const Login = () => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
         const user = result.user;
+        await setDoc(doc(db, "users", user.uid), JSON.parse(JSON.stringify(user)));
         authStore.setUser(user);
         authStore.setToken(token || "");
       }
@@ -67,6 +69,10 @@ const Login = () => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
         const user = result.user;
+        await setDoc(
+          doc(db, "users", user.uid),
+          JSON.parse(JSON.stringify(user)),
+        );
         authStore.setUser(user);
         authStore.setToken(token);
       }
