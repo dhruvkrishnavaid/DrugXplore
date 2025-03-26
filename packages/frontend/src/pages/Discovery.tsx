@@ -3,6 +3,8 @@ import { addDoc, collection } from "firebase/firestore/lite";
 import Markdown from "markdown-to-jsx";
 import { useState } from "react";
 import app, { db } from "../hooks/firebase";
+import { AnimatePresence } from "motion/react";
+import Popup from "../components/Popup";
 
 const Discovery = () => {
   const [medicine_name, setMedicineName] = useState("");
@@ -14,6 +16,9 @@ const Discovery = () => {
   const [result, setResult] = useState<{ text: string } | null>(null);
   const [regionsCount, setRegionsCount] = useState(1);
   const [activeCount, setActiveCount] = useState(1);
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
   const uid = getAuth(app).currentUser?.uid;
 
   // todo: sanitize user input
@@ -43,20 +48,27 @@ const Discovery = () => {
   };
 
   const saveResults = async () => {
-    if (uid) {
-      try {
-        await addDoc(collection(db, "discovery", uid, "results"), {
-          target_disease,
-          desired_extraction_method,
-          medicine_name,
-          active_compounds,
-          regions_of_interest,
-          result,
-        });
-        alert("Results saved successfully!");
-      } catch (error) {
-        console.error(error);
+    if (name && description) {
+      if (uid) {
+        try {
+          await addDoc(collection(db, "discovery", uid, "results"), {
+            name,
+            description,
+            target_disease,
+            desired_extraction_method,
+            medicine_name,
+            active_compounds,
+            regions_of_interest,
+            result,
+          });
+          setShowPopup(false);
+          alert("Results saved successfully!");
+        } catch (error) {
+          console.error(error);
+        }
       }
+    } else {
+      alert("Please enter a name and description to save the results");
     }
   };
 
@@ -361,7 +373,7 @@ const Discovery = () => {
           {!loading && (
             <button
               type="button"
-              onClick={saveResults}
+              onClick={() => setShowPopup(true)}
               className="flex px-4 py-2 font-bold text-white rounded cursor-pointer gap-2 bg-secondary w-fit hover:bg-primary transition-colors duration-300"
             >
               <svg
@@ -380,6 +392,45 @@ const Discovery = () => {
               Save Results
             </button>
           )}
+          <AnimatePresence>
+            {showPopup && (
+              <Popup
+                title="Save Results"
+                onClose={() => {
+                  setShowPopup(false);
+                }}
+                hasButtons
+                primaryAction={{
+                  label: "Save",
+                  onClick: saveResults,
+                }}
+                secondaryAction={{
+                  label: "Cancel",
+                  onClick: () => {
+                    setName("");
+                    setDescription("");
+                    setShowPopup(false);
+                  },
+                }}
+              >
+                <div className="flex flex-col gap-4">
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
+                  />
+                  <textarea
+                    placeholder="Description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+              </Popup>
+            )}
+          </AnimatePresence>
         </div>
       )}
     </div>

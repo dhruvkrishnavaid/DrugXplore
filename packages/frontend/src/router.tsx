@@ -7,6 +7,7 @@ import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
+import Saved from "./pages/Saved";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: "saved",
-        children: [{ path: "", element: <App page={"SAVED"} /> }],
+        children: [{ path: "", element: <App page={<Saved />} /> }],
       },
       {
         path: "about",
@@ -43,10 +44,6 @@ const router = createBrowserRouter([
       {
         path: "generate",
         children: [
-          {
-            path: "",
-            element: <App page={"GENERATE"} />,
-          },
           {
             path: "ayurveda",
             element: <App page={<Ayurveda />} />,

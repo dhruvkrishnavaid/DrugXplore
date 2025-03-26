@@ -1,7 +1,9 @@
 import { getAuth } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore/lite";
 import Markdown from "markdown-to-jsx";
+import { AnimatePresence } from "motion/react";
 import { useState } from "react";
+import Popup from "../components/Popup";
 import app, { db } from "../hooks/firebase";
 
 const Ayurveda = () => {
@@ -10,6 +12,9 @@ const Ayurveda = () => {
   const [symptoms, setSymptoms] = useState<string[]>([""]);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<{ text: string } | null>(null);
+  const [description, setDescription] = useState("");
+  const [name, setName] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
   // todo: sanitize user input
   const getResults = async () => {
     try {
@@ -31,16 +36,23 @@ const Ayurveda = () => {
   };
 
   const saveResults = async () => {
-    if (uid) {
-      try {
-        await addDoc(collection(db, "ayurveda", uid, "results"), {
-          symptoms,
-          result,
-        });
-        alert("Results saved successfully!");
-      } catch (error) {
-        console.error(error);
+    if (name && description) {
+      if (uid) {
+        try {
+          await addDoc(collection(db, "ayurveda", uid, "results"), {
+            name,
+            description,
+            symptoms,
+            result,
+          });
+          setShowPopup(false);
+          alert("Results saved successfully!");
+        } catch (error) {
+          console.error(error);
+        }
       }
+    } else {
+      alert("Please enter a name and description to save the results");
     }
   };
 
@@ -207,7 +219,7 @@ const Ayurveda = () => {
           {!loading && (
             <button
               type="button"
-              onClick={saveResults}
+              onClick={() => setShowPopup(true)}
               className="flex px-4 py-2 font-bold text-white rounded cursor-pointer gap-2 bg-secondary w-fit hover:bg-primary transition-colors duration-300"
             >
               <svg
@@ -228,6 +240,45 @@ const Ayurveda = () => {
           )}
         </div>
       )}
+      <AnimatePresence>
+        {showPopup && (
+          <Popup
+            title="Save Results"
+            onClose={() => {
+              setShowPopup(false);
+            }}
+            hasButtons
+            primaryAction={{
+              label: "Save",
+              onClick: saveResults,
+            }}
+            secondaryAction={{
+              label: "Cancel",
+              onClick: () => {
+                setName("");
+                setDescription("");
+                setShowPopup(false);
+              },
+            }}
+          >
+            <div className="flex flex-col gap-4">
+              <input
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
+              />
+              <textarea
+                placeholder="Description"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                className="p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
+              />
+            </div>
+          </Popup>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
