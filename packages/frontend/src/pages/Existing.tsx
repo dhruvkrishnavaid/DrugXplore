@@ -3,6 +3,7 @@ import { addDoc, collection } from "firebase/firestore/lite";
 import Markdown from "markdown-to-jsx";
 import { AnimatePresence } from "motion/react";
 import { useState } from "react";
+import AddInput from "../components/AddInput";
 import Popup from "../components/Popup";
 import app, { db } from "../hooks/firebase";
 
@@ -71,190 +72,24 @@ const Existing = () => {
       </p>
       <div className="w-full">
         <form className="flex flex-col w-full gap-4">
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-xl font-bold">Symptoms</span>
-            <button
-              type="button"
-              onClick={() => setSymptomsCount(symptomsCount + 1)}
-              className="items-center hidden px-4 py-2 font-bold text-white rounded cursor-pointer lg:flex gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M12 5l0 14" />
-                <path d="M5 12l14 0" />
-              </svg>
-              Add Symptom
-            </button>
-          </div>
-          {[...Array(symptomsCount)].map((_, i) => (
-            <div key={i} className="flex justify-between gap-4">
-              <input
-                type="text"
-                placeholder={`Symptom ${i + 1}`}
-                value={symptoms[i]}
-                onChange={(e) => {
-                  const newSymptoms = [...symptoms];
-                  newSymptoms[i] = e.target.value;
-                  setSymptoms(newSymptoms);
-                }}
-                className="w-full max-w-lg p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
-              />
-              {symptomsCount > 1 && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    const newSymptoms = [...symptoms];
-                    newSymptoms.splice(i, 1);
-                    setSymptoms(newSymptoms);
-                    setSymptomsCount(symptomsCount - 1);
-                  }}
-                  className="flex items-center justify-center p-2 text-red-500 rounded-full cursor-pointer bg-red-500/10 hover:bg-red-500/20 transition-colors duration-300"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M4 7l16 0" />
-                    <path d="M10 11l0 6" />
-                    <path d="M14 11l0 6" />
-                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                  </svg>
-                </button>
-              )}
-            </div>
-          ))}
-          <div className="flex justify-evenly gap-4">
-            <button
-              type="button"
-              onClick={() => setSymptomsCount(symptomsCount + 1)}
-              className="flex px-4 py-2 font-bold text-white rounded cursor-pointer lg:hidden gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M12 5l0 14" />
-                <path d="M5 12l14 0" />
-              </svg>
-              Add Symptom
-            </button>
-          </div>
-          <div className="flex items-center justify-between gap-4">
-            <span className="text-xl font-bold">Medicines</span>
-            <button
-              type="button"
-              onClick={() => setMedicinesCount(medicinesCount + 1)}
-              className="items-center hidden px-4 py-2 font-bold text-white rounded cursor-pointer lg:flex gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M12 5l0 14" />
-                <path d="M5 12l14 0" />
-              </svg>
-              Add Medicine
-            </button>
-          </div>
-          {[...Array(medicinesCount)].map((_, i) => (
-            <div key={i} className="flex justify-between gap-4">
-              <input
-                type="text"
-                placeholder={`Medicine ${i + 1}`}
-                value={medicines[i]}
-                onChange={(e) => {
-                  const newMedicines = [...medicines];
-                  newMedicines[i] = e.target.value;
-                  setMedicines(newMedicines);
-                }}
-                className="w-full max-w-lg p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
-              />
-              {medicinesCount > 1 && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    const newMedicines = [...medicines];
-                    newMedicines.splice(i, 1);
-                    setSymptoms(newMedicines);
-                    setMedicinesCount(medicinesCount - 1);
-                  }}
-                  className="flex items-center justify-center p-2 text-red-500 rounded-full cursor-pointer bg-red-500/10 hover:bg-red-500/20 transition-colors duration-300"
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M4 7l16 0" />
-                    <path d="M10 11l0 6" />
-                    <path d="M14 11l0 6" />
-                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                  </svg>
-                </button>
-              )}
-            </div>
-          ))}
-          <div className="flex justify-evenly gap-4">
-            <button
-              type="button"
-              onClick={() => setMedicinesCount(medicinesCount + 1)}
-              className="flex px-4 py-2 font-bold text-white rounded cursor-pointer gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M12 5l0 14" />
-                <path d="M5 12l14 0" />
-              </svg>
-              Add Medicine
-            </button>
-          </div>
+          <AddInput
+            title="Symptoms"
+            placeholder="Symptom"
+            count={symptomsCount}
+            inputs={symptoms}
+            setCount={setSymptomsCount}
+            setInputs={setSymptoms}
+            buttonText="Add Symptom"
+          />
+          <AddInput
+            title="Medicines"
+            placeholder="Medicine"
+            count={medicinesCount}
+            inputs={medicines}
+            setCount={setMedicinesCount}
+            setInputs={setMedicines}
+            buttonText="Add Medicine"
+          />
           <div className="flex justify-evenly gap-4">
             <button
               type="button"

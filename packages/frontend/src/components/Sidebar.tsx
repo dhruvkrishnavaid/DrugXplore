@@ -12,7 +12,7 @@ const Sidebar = () => {
     return location.pathname === path;
   };
   return (
-    <div className="fixed flex flex-col h-screen p-2 w-80">
+    <div className="hidden fixed md:flex flex-col h-screen p-2 w-80">
       <div className="flex flex-col h-full bg-white shadow-lg rounded-3xl">
         <div className="w-full p-6 font-black text-center">
           <h1 className="signature">DrugXplore</h1>

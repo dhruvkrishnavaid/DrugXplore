@@ -3,6 +3,7 @@ import { addDoc, collection } from "firebase/firestore/lite";
 import Markdown from "markdown-to-jsx";
 import { AnimatePresence } from "motion/react";
 import { useState } from "react";
+import AddInput from "../components/AddInput";
 import Popup from "../components/Popup";
 import app, { db } from "../hooks/firebase";
 
@@ -124,194 +125,24 @@ const Discovery = () => {
               className="w-full max-w-lg p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
             />
           </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between gap-4">
-              <span className="text-xl font-bold">Active Compounds</span>
-              <button
-                type="button"
-                onClick={() => setActiveCount(activeCount + 1)}
-                className="items-center hidden px-4 py-2 font-bold text-white rounded cursor-pointer lg:flex gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M12 5l0 14" />
-                  <path d="M5 12l14 0" />
-                </svg>
-                Add Active Compounds
-              </button>
-            </div>
-            {[...Array(activeCount)].map((_, i) => (
-              <div key={i} className="flex justify-between gap-4">
-                <input
-                  type="text"
-                  placeholder={`Active Compound`}
-                  value={active_compounds[i]}
-                  onChange={(e) => {
-                    const newActiveCompounds = [...active_compounds];
-                    newActiveCompounds[i] = e.target.value;
-                    setActiveCompounds(newActiveCompounds);
-                  }}
-                  className="w-full max-w-lg p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
-                />
-                {activeCount > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const newActiveCompounds = [...active_compounds];
-                      newActiveCompounds.splice(i, 1);
-                      setActiveCompounds(newActiveCompounds);
-                      setActiveCount(activeCount - 1);
-                    }}
-                    className="flex items-center justify-center p-2 text-red-500 rounded-full cursor-pointer bg-red-500/10 hover:bg-red-500/20 transition-colors duration-300"
-                  >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M4 7l16 0" />
-                      <path d="M10 11l0 6" />
-                      <path d="M14 11l0 6" />
-                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                    </svg>
-                  </button>
-                )}
-              </div>
-            ))}
-            <div className="flex justify-evenly gap-4">
-              <button
-                type="button"
-                onClick={() => setActiveCount(activeCount + 1)}
-                className="flex px-4 py-2 font-bold text-white rounded cursor-pointer lg:hidden gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M12 5l0 14" />
-                  <path d="M5 12l14 0" />
-                </svg>
-                Add Active Compounds
-              </button>
-            </div>
-          </div>
-          <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between gap-4">
-              <span className="text-xl font-bold">Regions of Interest</span>
-              <button
-                type="button"
-                onClick={() => setActiveCount(activeCount + 1)}
-                className="items-center hidden px-4 py-2 font-bold text-white rounded cursor-pointer lg:flex gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M12 5l0 14" />
-                  <path d="M5 12l14 0" />
-                </svg>
-                Add Regions of Interest
-              </button>
-            </div>
-            {[...Array(regionsCount)].map((_, i) => (
-              <div key={i} className="flex justify-between gap-4">
-                <input
-                  type="text"
-                  placeholder={`Region of interest`}
-                  value={regions_of_interest[i]}
-                  onChange={(e) => {
-                    const newRegions = [...regions_of_interest];
-                    newRegions[i] = e.target.value;
-                    setRegionsOfInterest(newRegions);
-                  }}
-                  className="w-full max-w-lg p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
-                />
-                {regionsCount > 1 && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const newRegions = [...regions_of_interest];
-                      newRegions.splice(i, 1);
-                      setRegionsOfInterest(newRegions);
-                      setRegionsCount(regionsCount - 1);
-                    }}
-                    className="flex items-center justify-center p-2 text-red-500 rounded-full cursor-pointer bg-red-500/10 hover:bg-red-500/20 transition-colors duration-300"
-                  >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M4 7l16 0" />
-                      <path d="M10 11l0 6" />
-                      <path d="M14 11l0 6" />
-                      <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                      <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                    </svg>
-                  </button>
-                )}
-              </div>
-            ))}
-            <div className="flex justify-evenly gap-4">
-              <button
-                type="button"
-                onClick={() => setRegionsCount(regionsCount + 1)}
-                className="flex px-4 py-2 font-bold text-white rounded cursor-pointer lg:hidden gap-2 bg-tertiary/95 hover:bg-tertiary transition-colors duration-300"
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M12 5l0 14" />
-                  <path d="M5 12l14 0" />
-                </svg>
-                Add Region of Interest
-              </button>
-            </div>
-          </div>
+          <AddInput
+            title="Active Compounds"
+            placeholder="Active Compound"
+            count={activeCount}
+            inputs={active_compounds}
+            setCount={setActiveCount}
+            setInputs={setActiveCompounds}
+            buttonText="Add Medicine"
+          />
+          <AddInput
+            title="Regions of Interest"
+            placeholder="Region of Interest"
+            count={regionsCount}
+            inputs={regions_of_interest}
+            setCount={setRegionsCount}
+            setInputs={setRegionsOfInterest}
+            buttonText="Add Region of Interest"
+          />
           <div className="flex justify-evenly gap-4">
             <button
               type="button"

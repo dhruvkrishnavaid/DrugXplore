@@ -1,19 +1,5 @@
 import { motion } from "motion/react";
-
-type PopupProps = {
-  children: React.ReactNode;
-  title: string;
-  onClose: () => void;
-  hasButtons?: boolean;
-  primaryAction?: {
-    label: string;
-    onClick: () => void;
-  };
-  secondaryAction?: {
-    label: string;
-    onClick: () => void;
-  };
-};
+import { PopupProps } from "../types";
 
 const Popup = ({
   children,
