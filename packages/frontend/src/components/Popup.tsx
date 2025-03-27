@@ -15,7 +15,6 @@ const Popup = ({
         initial={{ opacity: 0, backdropFilter: "blur(0)" }}
         animate={{ opacity: 1, dur: 300, backdropFilter: "blur(8px)" }}
         exit={{ opacity: 0, backdropFilter: "blur(0)" }}
-        onClick={onClose}
         className="fixed top-0 left-0 flex items-center justify-center w-screen h-screen bg-neutral-500/50"
       ></motion.button>
       <motion.div
