@@ -57,7 +57,7 @@ const AddInput = ({
               newInputs[i] = e.target.value;
               setInputs(newInputs);
             }}
-            className="w-full md:max-w-lg p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
+            className="w-full p-2 bg-white border rounded-lg outline-none md:max-w-lg border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
           />
           {count > 1 && (
             <button

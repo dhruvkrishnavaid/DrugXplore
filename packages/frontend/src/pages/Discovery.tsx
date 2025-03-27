@@ -95,7 +95,7 @@ const Discovery = () => {
               placeholder="Target Disease"
               value={target_disease}
               onChange={(e) => setTargetDisease(e.target.value)}
-              className="w-full md:max-w-lg p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
+              className="w-full p-2 bg-white border rounded-lg outline-none md:max-w-lg border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
             />
           </div>
           <div className="flex flex-col gap-4">
@@ -110,7 +110,7 @@ const Discovery = () => {
               placeholder="Desired Extraction Method"
               value={desired_extraction_method}
               onChange={(e) => setDesiredExtractionMethod(e.target.value)}
-              className="w-full md:max-w-lg p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
+              className="w-full p-2 bg-white border rounded-lg outline-none md:max-w-lg border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
             />
           </div>
           <div className="flex flex-col gap-4">
@@ -122,7 +122,7 @@ const Discovery = () => {
               placeholder="Medicine Name"
               value={medicine_name}
               onChange={(e) => setMedicineName(e.target.value)}
-              className="w-full md:max-w-lg p-2 bg-white border rounded-lg outline-none border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
+              className="w-full p-2 bg-white border rounded-lg outline-none md:max-w-lg border-neutral-300 text-neutral-900 ring-primary focus:ring-2 focus:ring-primary"
             />
           </div>
           <AddInput
