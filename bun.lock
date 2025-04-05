@@ -53,7 +53,9 @@
   },
   "trustedDependencies": [
     "esbuild",
+    "@firebase/util",
     "@swc/core",
+    "protobufjs",
   ],
   "packages": {
     "@esbuild/aix-ppc64": ["@esbuild/aix-ppc64@0.25.2", "", { "os": "aix", "cpu": "ppc64" }, "sha512-wCIboOL2yXZym2cgm6mlA742s9QeJ8DjGVaL39dLN4rRwrOgOyYSnOaFPhKZGLb2ngj4EyfAFjsNJwPXZvseag=="],

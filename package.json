@@ -2,8 +2,10 @@
   "name": "drugxplore",
   "private": true,
   "trustedDependencies": [
+    "@firebase/util",
     "@swc/core",
-    "esbuild"
+    "esbuild",
+    "protobufjs"
   ],
   "workspaces": [
     "packages/*"
