@@ -3,6 +3,7 @@ FROM oven/bun:latest
 WORKDIR /app
 
 ARG GOOGLE_GENAI_API_KEY
+ARG PORT
 
 COPY package.json ./
 COPY . ./
@@ -10,8 +11,8 @@ COPY . ./
 RUN bun install --omit=dev --omit=peer --omit=optional
 
 ENV GOOGLE_GENAI_API_KEY=$GOOGLE_GENAI_API_KEY
-ENV PORT=8080
+ENV PORT=$PORT
 
-EXPOSE 8080
+EXPOSE $PORT
 
 CMD [ "bun", "run", "start" ]
