@@ -1,13 +1,12 @@
-import { Link } from "react-router";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const Landing = () => {
-  return (
-    <div>
-      <h1>Landing</h1>
-      <p>Welcome to the landing page!</p>
-      <Link to="/login">Login</Link>
-    </div>
-  );
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/signup");
+  });
+  return <></>;
 };
 
 export default Landing;

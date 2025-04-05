@@ -50,7 +50,7 @@ const Signup = () => {
 
     if (
       !authStore.user &&
-      window.location.hostname.split(".").toSpliced(0, 2).join(".") ===
+      window.location.hostname.split(".").splice(2, 2).join(".") ===
         "cloudworkstations.dev"
     ) {
       test();
@@ -61,7 +61,7 @@ const Signup = () => {
     try {
       let result;
       if (
-        window.location.hostname.split(".").toSpliced(0, 2).join(".") ===
+        window.location.hostname.split(".").splice(2, 2).join(".") ===
         "cloudworkstations.dev"
       ) {
         signInWithRedirect(auth, provider);

@@ -45,6 +45,7 @@ const Existing = () => {
           await addDoc(collection(db, "existing", uid, "results"), {
             name,
             description,
+            medicines,
             symptoms,
             result,
           });

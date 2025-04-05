@@ -132,7 +132,7 @@ const Discovery = () => {
             inputs={active_compounds}
             setCount={setActiveCount}
             setInputs={setActiveCompounds}
-            buttonText="Add Medicine"
+            buttonText="Add Active Compound"
           />
           <AddInput
             title="Regions of Interest"

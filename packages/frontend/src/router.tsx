@@ -7,6 +7,7 @@ import Existing from "./pages/Existing";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import Results from "./pages/Results";
 import Saved from "./pages/Saved";
 import Signup from "./pages/Signup";
 
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
       {
         path: "profile",
         children: [{ path: "", element: <App page={<Profile />} /> }],
+      },
+      {
+        path: ":type/:uid/results/:file",
+        children: [{ path: "", element: <App page={<Results />} /> }],
       },
     ],
   },

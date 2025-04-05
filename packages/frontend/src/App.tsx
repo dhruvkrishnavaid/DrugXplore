@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
+import Bottombar from "./components/Bottombar";
 import Sidebar from "./components/Sidebar";
 import useAuthStore from "./hooks/useAuthStore";
 import { AppProps } from "./types";
-import Bottombar from "./components/Bottombar";
 
 const App = ({ page }: AppProps) => {
   const authStore = useAuthStore();
