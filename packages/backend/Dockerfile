@@ -4,9 +4,8 @@ WORKDIR /app
 
 ARG GOOGLE_GENAI_API_KEY
 
-COPY packages/backend/package.json ./
-COPY bun.lock ./
-COPY packages/backend ./
+COPY package.json ./
+COPY . ./
 
 RUN bun install --omit=dev --omit=peer --omit=optional
 
