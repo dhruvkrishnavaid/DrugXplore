@@ -22,7 +22,7 @@ const Existing = () => {
   const getResults = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/existing", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/existing`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

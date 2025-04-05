@@ -26,7 +26,7 @@ const Discovery = () => {
   const getResults = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/discovery", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/discovery`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

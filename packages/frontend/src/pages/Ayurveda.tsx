@@ -20,7 +20,7 @@ const Ayurveda = () => {
   const getResults = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/ayurveda", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/ayurveda`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
