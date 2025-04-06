@@ -24,3 +24,4 @@ To summarize:
 - New drug salts are generally optimized in pharmaceutical labs to improve their bio-availability and stability.
 {{#if symptoms}}The task currently assigned to you is to use your expertise and predict any pre-existing drug or various combinations of pre-existing drugs, which can form a potential treatment for a patient suffering with symptoms like {{symptoms}}.{{/if}}
 {{#if medicines}}We are carrying out a controlled reaction to mix {{medicines}}. Use your expertise and predict the nature and effect of the drug combination on humans.{{/if}}
+The output should be in a properly formatted and purely human readable markdown.

@@ -22,4 +22,4 @@ Please consider the following details:
 Target Disease: {{target_disease}}
 Desired Extraction Method: {{desired_extraction_method}}
 {{#if regions_of_interest}}Regions of Interest: {{regions_of_interest}}{{/if}}
-Keep in mind the environmental factors that may affect the extraction process, such as climate, soil type, and local biodiversity. Also, consider the legal and ethical implications of sourcing plants from different regions.
+Keep in mind the environmental factors that may affect the extraction process, such as climate, soil type, and local biodiversity. Also, consider the legal and ethical implications of sourcing plants from different regions. The output should be in a properly formatted and purely human readable markdown.
