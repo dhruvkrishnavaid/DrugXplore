@@ -37,8 +37,9 @@ const Signup = () => {
     }
   }, [authStore.user, location.state, navigate]);
 
+
   useEffect(() => {
-    const test = async () => {
+    const handleRedirectResult = async () => {
       const result = await getRedirectResult(auth);
       if (result) {
         const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -58,7 +59,7 @@ const Signup = () => {
       window.location.hostname.split(".").splice(2, 2).join(".") ===
         "cloudworkstations.dev"
     ) {
-      test();
+      handleRedirectResult();
     }
   }, [auth, authStore]);
 
