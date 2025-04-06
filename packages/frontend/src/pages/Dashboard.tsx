@@ -82,7 +82,7 @@ const Dashboard = () => {
                     initial={{ opacity: 0, height: 0, y: -35 }}
                     animate={{ opacity: 1, height: "auto", dur: 300, y: 0 }}
                     exit={{ opacity: 0, height: 0, y: -35 }}
-                    className="absolute flex flex-col bg-white border rounded-lg shadow-xl top-11/12 lg:left-1/2 w-2xs border-neutral-200"
+                    className="absolute flex flex-col bg-white border rounded-lg shadow-xl top-11/12 left-1/2 w-2xs border-neutral-200"
                   >
                     <Link
                       to="/app/generate/discovery"
