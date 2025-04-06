@@ -130,8 +130,8 @@ const Saved = () => {
           results[1].isLoading ||
           results[2].isLoading
         ) && (
-          <div className="flex flex-col items-center justify-center w-full p-4 gap-4 h-min">
-            <img src="/52220.png" alt="No Results" className="w-full" />
+          <div className="flex flex-col items-center justify-center w-full p-4 gap-4 h-full">
+            <img src="/52220.png" alt="No Results" className="w-full max-w-4xl" />
             <div className="text-4xl font-bold">No Results Saved Yet</div>
             Start saving your results to see them here!
           </div>
