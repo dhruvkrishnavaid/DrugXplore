@@ -2,6 +2,6 @@ import { Router } from "express";
 import greetController from "../controllers/greet";
 
 const router = Router();
-router.post("/greet", greetController);
+router.get("/greet", greetController);
 
 export default router;

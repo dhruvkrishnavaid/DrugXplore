@@ -46,12 +46,12 @@ const Saved = () => {
             </div>
           )}
           {results[0].data?.length ? (
-            <div className="items-center justify-center grid gap-4 sm:grid-cols-2 md:grid-cols-none lg:grid-cols-2 w-fit xl:grid-cols-3 2xl:grid-cols-5">
+            <div className="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-none lg:grid-cols-2 md:w-full sm:lg:w-fit xl:grid-cols-3 2xl:grid-cols-5">
               {results[0].data?.map((i: DiscoveryRes, index: number) => (
                 <Link
                   to={`/app/${i.path}`}
                   key={index}
-                  className="flex flex-col h-24 p-4 mx-auto bg-white border rounded-lg shadow-md gap-2 border-tertiary hover:bg-tertiary/50 transition-all duration-300 w-3xs hover:shadow-lg"
+                  className="flex flex-col w-full h-24 p-4 bg-white border rounded-lg shadow-md sm:lg:mx-auto gap-2 border-tertiary hover:bg-tertiary/50 transition-all duration-300 md:w-full sm:lg:w-3xs hover:shadow-lg"
                 >
                   <div className="text-lg font-bold">{i.name}</div>
                   <div className="text-sm truncate text-neutral-700">
@@ -75,12 +75,12 @@ const Saved = () => {
             </div>
           )}
           {results[1].data?.length ? (
-            <div className="items-center justify-center grid gap-4 sm:grid-cols-2 md:grid-cols-none lg:grid-cols-2 w-fit xl:grid-cols-3 2xl:grid-cols-5">
+            <div className="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-none lg:grid-cols-2 md:w-full sm:lg:w-fit xl:grid-cols-3 2xl:grid-cols-5">
               {results[1].data?.map((i: AyurvedicRes, index: number) => (
                 <Link
                   to={`/app/${i.path}`}
                   key={index}
-                  className="flex flex-col h-24 p-4 mx-auto bg-white border rounded-lg shadow-md gap-2 border-tertiary hover:bg-tertiary/50 transition-all duration-300 w-3xs hover:shadow-lg"
+                  className="flex flex-col w-full h-24 p-4 bg-white border rounded-lg shadow-md sm:lg:mx-auto gap-2 border-tertiary hover:bg-tertiary/50 transition-all duration-300 md:w-full sm:lg:w-3xs hover:shadow-lg"
                 >
                   <div className="text-lg font-bold">{i.name}</div>
                   <div className="text-sm truncate text-neutral-700">
@@ -104,12 +104,12 @@ const Saved = () => {
             </div>
           )}
           {results[2].data?.length ? (
-            <div className="items-center justify-center grid gap-4 sm:grid-cols-2 md:grid-cols-none lg:grid-cols-2 w-fit xl:grid-cols-3 2xl:grid-cols-5">
+            <div className="w-full grid gap-4 sm:grid-cols-2 md:grid-cols-none lg:grid-cols-2 md:w-full sm:lg:w-fit xl:grid-cols-3 2xl:grid-cols-5">
               {results[2].data?.map((i: ExistingRes, index: number) => (
                 <Link
                   to={`/app/${i.path}`}
                   key={index}
-                  className="flex flex-col h-24 p-4 mx-auto bg-white border rounded-lg shadow-md gap-2 border-tertiary hover:bg-tertiary/50 transition-all duration-300 w-3xs hover:shadow-lg"
+                  className="flex flex-col w-full h-24 p-4 bg-white border rounded-lg shadow-md sm:lg:mx-auto gap-2 border-tertiary hover:bg-tertiary/50 transition-all duration-300 md:w-full sm:lg:w-3xs hover:shadow-lg"
                 >
                   <div className="text-lg font-bold">{i.name}</div>
                   <div className="text-sm truncate text-neutral-700">
@@ -131,7 +131,11 @@ const Saved = () => {
           results[2].isLoading
         ) && (
           <div className="flex flex-col items-center justify-center w-full p-4 gap-4 h-full">
-            <img src="/52220.png" alt="No Results" className="w-full max-w-4xl" />
+            <img
+              src="/52220.png"
+              alt="No Results"
+              className="w-full max-w-4xl"
+            />
             <div className="text-4xl font-bold">No Results Saved Yet</div>
             Start saving your results to see them here!
           </div>

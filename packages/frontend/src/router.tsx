@@ -38,10 +38,6 @@ const router = createBrowserRouter([
         children: [{ path: "", element: <App page={<Dashboard />} /> }],
       },
       {
-        path: "explore",
-        children: [{ path: "", element: <App page={"EXPLORE"} /> }],
-      },
-      {
         path: "saved",
         children: [{ path: "", element: <App page={<Saved />} /> }],
       },
