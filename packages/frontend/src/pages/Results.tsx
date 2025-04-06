@@ -40,7 +40,7 @@ const Results = () => {
         <Link
           to={user ? "/app" : "/"}
           state={{ from: location.pathname }}
-          className="signature pointer-events-auto! absolute top-4 right-6 z-50"
+          className="signature pointer-events-auto! hidden sm:block absolute top-4 right-6 z-50"
         >
           DrugXplore
         </Link>

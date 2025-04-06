@@ -120,25 +120,6 @@ const Bottombar = () => {
                 </svg>
               </button>
               <Link
-                to="/app/generate/ayurveda"
-                onClick={() => setIsGenerateOpen(false)}
-                className={`h-16 w-full flex gap-2 items-center justify-center transition-all duration-300 ${
-                  isActive("/app/generate/ayurveda") &&
-                  "text-primary font-extrabold"
-                }`}
-              >
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M6 3a7 7 0 0 1 6.95 6.155a6.97 6.97 0 0 1 5.05 -2.155h3a1 1 0 0 1 1 1v1a7 7 0 0 1 -7 7h-2v4a1 1 0 0 1 -2 0v-7h-2a7 7 0 0 1 -7 -7v-2a1 1 0 0 1 1 -1z" />
-                </svg>
-                Ayurveda
-              </Link>
-              <Link
                 to="/app/generate/discovery"
                 onClick={() => setIsGenerateOpen(false)}
                 className={`h-16 w-full flex gap-2 items-center justify-center transition-all duration-300 ${
@@ -156,6 +137,25 @@ const Bottombar = () => {
                   <path d="M6 3a7 7 0 0 1 6.95 6.155a6.97 6.97 0 0 1 5.05 -2.155h3a1 1 0 0 1 1 1v1a7 7 0 0 1 -7 7h-2v4a1 1 0 0 1 -2 0v-7h-2a7 7 0 0 1 -7 -7v-2a1 1 0 0 1 1 -1z" />
                 </svg>
                 Discovery
+              </Link>
+              <Link
+                to="/app/generate/ayurveda"
+                onClick={() => setIsGenerateOpen(false)}
+                className={`h-16 w-full flex gap-2 items-center justify-center transition-all duration-300 ${
+                  isActive("/app/generate/ayurveda") &&
+                  "text-primary font-extrabold"
+                }`}
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M6 3a7 7 0 0 1 6.95 6.155a6.97 6.97 0 0 1 5.05 -2.155h3a1 1 0 0 1 1 1v1a7 7 0 0 1 -7 7h-2v4a1 1 0 0 1 -2 0v-7h-2a7 7 0 0 1 -7 -7v-2a1 1 0 0 1 1 -1z" />
+                </svg>
+                Ayurveda
               </Link>
               <Link
                 to="/app/generate/existing"
