@@ -26,6 +26,10 @@ const router = createBrowserRouter([
     element: <Signup />,
   },
   {
+    path: ":type/:uid/results/:file",
+    children: [{ path: "", element: <Results /> }],
+  },
+  {
     path: "app",
     children: [
       {

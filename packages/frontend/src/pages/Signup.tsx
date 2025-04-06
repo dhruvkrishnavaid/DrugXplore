@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore/lite";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import app, { analytics, db } from "../hooks/firebase";
 import useAuthStore from "../hooks/useAuthStore";
 
@@ -22,15 +22,20 @@ const Signup = () => {
 
   const navigate = useNavigate();
   const authStore = useAuthStore();
+  const location = useLocation();
 
   useEffect(() => {
     if (authStore.user) {
-      navigate("/app");
-      logEvent(analytics, "signup", {
-        method: "google",
-      });
+      if (location.state && location.state?.from) {
+        navigate(`/app${location.state.from}`);
+      } else {
+        navigate("/app");
+        logEvent(analytics, "login", {
+          method: "google",
+        });
+      }
     }
-  }, [authStore.user, navigate]);
+  }, [authStore.user, location.state, navigate]);
 
   useEffect(() => {
     const test = async () => {
