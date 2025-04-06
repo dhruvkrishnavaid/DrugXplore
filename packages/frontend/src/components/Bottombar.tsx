@@ -9,8 +9,8 @@ const Bottombar = () => {
     return location.pathname === path;
   };
   return (
-    <div className="fixed bottom-0 flex w-full h-16 bg-white border-t border-gray-200 justify-evenly md:hidden gap-4">
-      <div className="bottom-0 z-20 flex w-full h-16 bg-white border-t border-gray-200 justify-evenly md:hidden gap-4">
+    <div className="fixed bottom-0 flex w-full h-16 bg-white border-t border-neutral-200 justify-evenly md:hidden gap-4">
+      <div className="bottom-0 z-20 flex w-full h-16 bg-white border-t border-neutral-200 justify-evenly md:hidden gap-4">
         <Link
           to="/app"
           onClick={() => setIsGenerateOpen(false)}
@@ -110,7 +110,7 @@ const Bottombar = () => {
               initial={{ y: 75, opacity: 0 }}
               animate={{ y: 0, opacity: 100, dur: 300 }}
               exit={{ y: 75, opacity: 0 }}
-              className="fixed left-0 z-10 w-full bg-white border-t border-gray-200 bottom-16 rounded-t-3xl"
+              className="fixed left-0 z-10 w-full bg-white border-t border-neutral-200 bottom-16 rounded-t-3xl"
             >
               <button
                 type="button"

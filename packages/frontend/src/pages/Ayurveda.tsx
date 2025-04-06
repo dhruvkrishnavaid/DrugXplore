@@ -112,7 +112,7 @@ const Ayurveda = () => {
           <span className="flex gap-5">
             <svg
               aria-hidden="true"
-              className="w-8 h-8 text-gray-200 animate-spin fill-primary"
+              className="w-8 h-8 text-neutral-200 animate-spin fill-primary"
               viewBox="0 0 100 101"
               fill="none"
             >

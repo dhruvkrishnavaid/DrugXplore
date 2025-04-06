@@ -133,7 +133,7 @@ const Signup = () => {
               Let's Get
               <br /> You Onboard!
             </h1>
-            <p className="mb-4 text-gray-600">
+            <p className="mb-4 text-neutral-600">
               Hey there, welcome to DrugXplore
             </p>
           </div>
@@ -163,7 +163,7 @@ const Signup = () => {
                       )
                       ? "text-green-500"
                       : "text-red-500"
-                    : "text-gray-600"
+                    : "text-neutral-600"
                 }
               >
                 Enter a valid email address (gmail.com, yahoo.com, outlook.com,
@@ -175,7 +175,7 @@ const Signup = () => {
                     ? password.length > 7
                       ? "text-green-500"
                       : "text-red-500"
-                    : "text-gray-600"
+                    : "text-neutral-600"
                 }
               >
                 Enter a password of atleast 8 characters
@@ -208,7 +208,7 @@ const Signup = () => {
             </div>
           </form>
           <div className="flex">
-            <p className="text-gray-600">Already have an account?</p>
+            <p className="text-neutral-600">Already have an account?</p>
             <Link
               to="/login"
               className="ml-2 font-semibold text-primary/80 hover:text-primary transition-colors duration-300"

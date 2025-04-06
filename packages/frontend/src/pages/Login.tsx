@@ -124,7 +124,7 @@ const Login = () => {
               Hola,
               <br /> Welcome back!
             </h1>
-            <p className="mb-4 text-gray-600">
+            <p className="mb-4 text-neutral-600">
               Hey, welcome back to DrugXplore
             </p>
           </div>
@@ -167,7 +167,7 @@ const Login = () => {
             </div>
           </form>
           <div className="flex">
-            <p className="text-gray-600">Don't have an account?</p>
+            <p className="text-neutral-600">Don't have an account?</p>
             <Link
               to="/signup"
               className="ml-2 font-semibold text-primary/80 hover:text-primary transition-colors duration-300"

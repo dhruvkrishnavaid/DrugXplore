@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import App from "./App";
 import Ayurveda from "./pages/Ayurveda";
+import Dashboard from "./pages/Dashboard";
 import Discovery from "./pages/Discovery";
 import Error from "./pages/Error";
 import Existing from "./pages/Existing";
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        children: [{ path: "", element: <App page={"DASHBOARD"} /> }],
+        children: [{ path: "", element: <App page={<Dashboard />} /> }],
       },
       {
         path: "explore",
