@@ -3,12 +3,14 @@ import { addDoc, collection } from "firebase/firestore/lite";
 import Markdown from "markdown-to-jsx";
 import { AnimatePresence } from "motion/react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import AddInput from "../components/AddInput";
 import Popup from "../components/Popup";
 import app, { db } from "../hooks/firebase";
 
 const Ayurveda = () => {
   const uid = getAuth(app).currentUser?.uid;
+  const navigate = useNavigate();
   const [count, setCount] = useState(1);
   const [symptoms, setSymptoms] = useState<string[]>([""]);
   const [loading, setLoading] = useState(false);
@@ -40,7 +42,7 @@ const Ayurveda = () => {
     if (name && description) {
       if (uid) {
         try {
-          await addDoc(collection(db, "ayurveda", uid, "results"), {
+          const doc = await addDoc(collection(db, "ayurveda", uid, "results"), {
             name,
             description,
             symptoms,
@@ -48,6 +50,7 @@ const Ayurveda = () => {
           });
           setShowPopup(false);
           alert("Results saved successfully!");
+          navigate(`/app/${doc.path}`);
         } catch (error) {
           console.error(error);
         }

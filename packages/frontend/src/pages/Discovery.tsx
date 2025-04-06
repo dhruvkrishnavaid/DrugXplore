@@ -3,11 +3,13 @@ import { addDoc, collection } from "firebase/firestore/lite";
 import Markdown from "markdown-to-jsx";
 import { AnimatePresence } from "motion/react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import AddInput from "../components/AddInput";
 import Popup from "../components/Popup";
 import app, { db } from "../hooks/firebase";
 
 const Discovery = () => {
+  const navigate = useNavigate();
   const [medicine_name, setMedicineName] = useState("");
   const [active_compounds, setActiveCompounds] = useState<string[]>([""]);
   const [target_disease, setTargetDisease] = useState("");
@@ -52,18 +54,22 @@ const Discovery = () => {
     if (name && description) {
       if (uid) {
         try {
-          await addDoc(collection(db, "discovery", uid, "results"), {
-            name,
-            description,
-            target_disease,
-            desired_extraction_method,
-            medicine_name,
-            active_compounds,
-            regions_of_interest,
-            result,
-          });
+          const doc = await addDoc(
+            collection(db, "discovery", uid, "results"),
+            {
+              name,
+              description,
+              target_disease,
+              desired_extraction_method,
+              medicine_name,
+              active_compounds,
+              regions_of_interest,
+              result,
+            },
+          );
           setShowPopup(false);
           alert("Results saved successfully!");
+          navigate(`/app/${doc.path}`);
         } catch (error) {
           console.error(error);
         }

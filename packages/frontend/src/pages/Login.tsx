@@ -37,7 +37,6 @@ const Login = () => {
     }
   }, [authStore.user, location.state, navigate]);
 
-
   useEffect(() => {
     const handleRedirectResult = async () => {
       const result = await getRedirectResult(auth);

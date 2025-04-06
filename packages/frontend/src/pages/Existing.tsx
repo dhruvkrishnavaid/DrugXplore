@@ -3,11 +3,13 @@ import { addDoc, collection } from "firebase/firestore/lite";
 import Markdown from "markdown-to-jsx";
 import { AnimatePresence } from "motion/react";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import AddInput from "../components/AddInput";
 import Popup from "../components/Popup";
 import app, { db } from "../hooks/firebase";
 
 const Existing = () => {
+  const navigate = useNavigate();
   const uid = getAuth(app).currentUser?.uid;
   const [symptomsCount, setSymptomsCount] = useState(1);
   const [medicinesCount, setMedicinesCount] = useState(1);
@@ -42,7 +44,7 @@ const Existing = () => {
     if (name && description) {
       if (uid) {
         try {
-          await addDoc(collection(db, "existing", uid, "results"), {
+          const doc = await addDoc(collection(db, "existing", uid, "results"), {
             name,
             description,
             medicines,
@@ -51,6 +53,7 @@ const Existing = () => {
           });
           setShowPopup(false);
           alert("Results saved successfully!");
+          navigate(`/app/${doc.path}`);
         } catch (error) {
           console.error(error);
         }
