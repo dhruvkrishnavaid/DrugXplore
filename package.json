@@ -4,6 +4,7 @@
   "trustedDependencies": [
     "@firebase/util",
     "@swc/core",
+    "@tailwindcss/oxide",
     "esbuild",
     "protobufjs"
   ],
