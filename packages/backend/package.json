@@ -8,18 +8,18 @@
     "start": "bun ./index.ts"
   },
   "dependencies": {
-    "@genkit-ai/googleai": "^1.21.0",
+    "@genkit-ai/googleai": "^1.24.0",
     "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^4.21.2",
-    "genkit": "^1.21.0"
+    "genkit": "^1.24.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.6",
     "@types/bun": "latest",
     "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.3",
+    "@types/express": "^5.0.5",
     "typescript": "^5.9.3"
   }
 }
