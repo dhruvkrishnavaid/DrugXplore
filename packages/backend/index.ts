@@ -17,7 +17,6 @@ app.use(
   cors({
     origin: ["http://localhost:5173", "https://drugxplore.web.app"],
     optionsSuccessStatus: 200,
-    credentials: true,
   }),
 );
 app.use(bodyParser.json());
