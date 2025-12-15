@@ -13,7 +13,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(hpp());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://drugxplore.web.app"],
+    optionsSuccessStatus: 200,
+    credentials: true,
+  }),
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
