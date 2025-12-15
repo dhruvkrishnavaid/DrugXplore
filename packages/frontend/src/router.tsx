@@ -1,16 +1,18 @@
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router";
-import App from "./App";
-import Ayurveda from "./pages/Ayurveda";
-import Dashboard from "./pages/Dashboard";
-import Discovery from "./pages/Discovery";
-import Error from "./pages/Error";
-import Existing from "./pages/Existing";
-import Landing from "./pages/Landing";
-import Login from "./pages/Login";
-import Profile from "./pages/Profile";
-import Results from "./pages/Results";
-import Saved from "./pages/Saved";
-import Signup from "./pages/Signup";
+
+const App = lazy(() => import("./App"));
+const Ayurveda = lazy(() => import("./pages/Ayurveda"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Discovery = lazy(() => import("./pages/Discovery"));
+const Error = lazy(() => import("./pages/Error"));
+const Existing = lazy(() => import("./pages/Existing"));
+const Landing = lazy(() => import("./pages/Landing"));
+const Login = lazy(() => import("./pages/Login"));
+const Profile = lazy(() => import("./pages/Profile"));
+const Results = lazy(() => import("./pages/Results"));
+const Saved = lazy(() => import("./pages/Saved"));
+const Signup = lazy(() => import("./pages/Signup"));
 
 const router = createBrowserRouter([
   {
