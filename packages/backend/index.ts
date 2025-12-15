@@ -13,9 +13,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 const corsOptions = {
-  origin: true,
+  origin: '*',
   optionsSuccessStatus: 200,
-  credentials: true,
 };
 
 app.use(hpp());
