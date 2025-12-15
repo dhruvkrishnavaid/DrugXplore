@@ -12,15 +12,8 @@ import greetRouter from "./src/routes/greet";
 const app = express();
 const port = process.env.PORT || 3000;
 
-const allowedOrigins = ["http://localhost:5173", "https://drugxplore.web.app"];
-
-const corsOptions = {
-  origin: allowedOrigins,
-  optionsSuccessStatus: 200,
-};
-
 app.use(hpp());
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
